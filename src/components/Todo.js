@@ -1,6 +1,10 @@
-import React from 'react';
+import React, { useContext } from 'react'
 
-const Todo = ({ text, todos, todo, setTodos }) => {
+//components
+import { FormContext } from "../App"
+
+const Todo = ({ text, todo }) => {
+    const { setTodos, todos } = useContext(FormContext);
     const deleteHandler = () => {
         setTodos(todos.filter((el) => el.id !== todo.id));
     };

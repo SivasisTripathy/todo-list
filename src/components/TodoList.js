@@ -1,18 +1,17 @@
-import React from 'react';
+import React, { useContext } from 'react';
 
 //components
 import Todo from './Todo';
+import { FormContext } from "../App"
 
-const TodoList = ({ setTodos, todos, filteredTodos }) => {
-    console.log(todos);
+const TodoList = () => {
+    const { filteredTodos } = useContext(FormContext);
     return (
         <div className="todo-container">
             <ul className="todo-list">
                 {
                     filteredTodos.map((todo) => (
-                        <Todo setTodos={setTodos}
-                            todos={todos}
-                            todo={todo}
+                        <Todo todo={todo}
                             key={todo.id}
                             text={todo.text}
                         />

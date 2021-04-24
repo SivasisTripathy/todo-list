@@ -1,12 +1,18 @@
-import React from 'react'
+import React, { useContext } from 'react'
 
-const Form = ({ inputText, todos, setTodos, setInputText, setStatus }) => {
+//components
+import { FormContext } from "../App"
+
+const Form = () => {
+    const { inputText, todos, setTodos, setInputText, setStatus } = useContext(FormContext);
     const inputTextHandler = (e) => {
         setInputText(e.target.value);
     };
     const submitTodoHandler = (e) => {
         e.preventDefault();
-        setTodos([...todos, { text: inputText, completed: false, id: Math.random() * 1000 }]);
+        if (inputText !== "") {
+            setTodos([...todos, { text: inputText, completed: false, id: Math.random() * 1000 }]);
+        }
         setInputText("");
     };
     const statusHandler = (e) => {
@@ -20,9 +26,9 @@ const Form = ({ inputText, todos, setTodos, setInputText, setStatus }) => {
             </button>
             <div className="select">
                 <select onChange={statusHandler} name="todos" className="filter-todo">
-                    <option value="all">All</option>
-                    <option value="completed">Completed</option>
-                    <option value="uncompleted">Uncompleted</option>
+                    <option className="opall" value="all">All</option>
+                    <option className="opcom" value="completed">Completed</option>
+                    <option className="opunc" value="uncompleted">Uncompleted</option>
                 </select>
             </div>
         </form>

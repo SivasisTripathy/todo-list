@@ -5,6 +5,8 @@ import './App.css';
 import Form from "./components/Form"
 import TodoList from "./components/TodoList"
 
+const FormContext = React.createContext();
+
 function App() {
   //states
   const [inputText, setInputText] = useState("");
@@ -54,19 +56,16 @@ function App() {
   };
 
   return (
-    <div className="App">
-      <header>
-        <h1>The Todo List</h1>
-      </header>
-      <Form
-        inputText={inputText}
-        todos={todos}
-        setTodos={setTodos}
-        setInputText={setInputText}
-        setStatus={setStatus} />
-      <TodoList setTodos={setTodos} todos={todos} filteredTodos={filteredTodos} />
-    </div>
+    <FormContext.Provider value={{ inputText, todos, setTodos, setInputText, setStatus, filteredTodos }}>
+      <div className="App">
+        <header>
+          <h1>The Todo List</h1>
+        </header>
+        <Form />
+        <TodoList />
+      </div>
+    </FormContext.Provider>
   );
 }
 
-export default App;
+export { App, FormContext };
